@@ -8,11 +8,11 @@
   var addrMarker;
   var addrMarkerImage = 'http://derekeder.com/images/icons/blue-pushpin.png';
   
-  var fusionTableId = 2086698; //replace this with the ID of your fusion table
+  var fusionTableId = 3102026; //replace this with the ID of your fusion table
   
-  var searchRadius = 805; //in meters ~ 1/2 mile
-  var recordName = "result";
-  var recordNamePlural = "results";
+  var searchRadius = 1; //in meters ~ 1/2 mile
+  var recordName = "tier";
+  var recordNamePlural = "tiers";
   var searchrecords;
   var records = new google.maps.FusionTablesLayer(fusionTableId);
   
@@ -23,6 +23,7 @@
   
   function initialize() {
 	$( "#resultCount" ).html("");
+	$( "#tierNumber").html("");
   
   	geocoder = new google.maps.Geocoder();
     var chicago = new google.maps.LatLng(41.850033, -87.6500523);
@@ -33,11 +34,10 @@
     };
     map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
 	
-	$("#ddlRadius").val("805");
-	
 	$("#cbType1").attr("checked", "checked");
 	$("#cbType2").attr("checked", "checked");
 	$("#cbType3").attr("checked", "checked");
+	$("#cbType4").attr("checked", "checked");
 	
 	searchrecords = null;
 	$("#txtSearchAddress").val("");
@@ -48,11 +48,11 @@
 	{
 		clearSearch();
 		var address = $("#txtSearchAddress").val();
-		searchRadius = $("#ddlRadius").val();
 		
 		var type1 = $("#cbType1").is(':checked');
 		var type2 = $("#cbType2").is(':checked');
 		var type3 = $("#cbType3").is(':checked');
+		var type4 = $("#cbType4").is(':checked');
 		
 		searchStr = "SELECT geometry FROM " + fusionTableId + " WHERE geometry not equal to ''";
 		
@@ -60,13 +60,15 @@
 		//remove this if you don't have any types to filter
 		
 		//best way to filter results by a type is to create a 'type' column and assign each row a number (strings work as well, but numbers are faster). then we can use the 'IN' operator and return all that are selected
-		var searchType = "type IN (-1,";
-        if (type1) //drop-off center
+		var searchType = "TIER IN (-1,";
+        if (type1)
 			searchType += "1,";
-		if (type2) //private
+		if (type2)
 			searchType += "2,";
-		if (type3) //hazardous waste site
+		if (type3)
 			searchType += "3,";
+		if (type4)
+			searchType += "4,";	
 
         searchStr += " AND " + searchType.slice(0, searchType.length - 1) + ")";
 		
@@ -82,40 +84,40 @@
 			{
 			  if (status == google.maps.GeocoderStatus.OK) 
 			  {
-				//console.log("found address: " + results[0].geometry.location.toString());
-				map.setCenter(results[0].geometry.location);
-				map.setZoom(14);
-				
-				addrMarker = new google.maps.Marker({
-				  position: results[0].geometry.location, 
-				  map: map, 
-				  icon: addrMarkerImage,
-				  animation: google.maps.Animation.DROP,
-				  title:address
-				});
-				drawSearchRadiusCircle(results[0].geometry.location);
-				
-				searchStr += " AND ST_INTERSECTS(geometry, CIRCLE(LATLNG" + results[0].geometry.location.toString() + "," + searchRadius + "))";
-				
-				//get using all filters
-				//console.log(searchStr);
-				searchrecords = new google.maps.FusionTablesLayer(fusionTableId, {
-					query: searchStr}
-					);
-			
-				searchrecords.setMap(map);
-				displayCount(searchStr);
+  				//console.log("found address: " + results[0].geometry.location.toString());
+  				map.setCenter(results[0].geometry.location);
+  				map.setZoom(14);
+  				
+  				addrMarker = new google.maps.Marker({
+  				  position: results[0].geometry.location, 
+  				  map: map, 
+  				  icon: addrMarkerImage,
+  				  animation: google.maps.Animation.DROP,
+  				  title:address
+  				});
+  				//drawSearchRadiusCircle(results[0].geometry.location);
+  				
+  				searchStr += " AND ST_INTERSECTS(geometry, CIRCLE(LATLNG" + results[0].geometry.location.toString() + "," + searchRadius + "))";
+  				
+  				//get using all filters
+  				//console.log(searchStr);
+  				searchrecords = new google.maps.FusionTablesLayer(fusionTableId, {
+  					query: searchStr}
+  					);
+  			
+  				searchrecords.setMap(map);
+  				displayCount(searchStr);
+  				getTierNumber(searchStr);
 			  } 
 			  else 
 			  {
-				alert("We could not find your address: " + status);
+				  alert("We could not find your address: " + status);
 			  }
 			});
 		}
 		else
 		{
 			//get using all filters
-			//console.log(searchStr);
 			searchrecords = new google.maps.FusionTablesLayer(fusionTableId, {
 				query: searchStr}
 				);
@@ -123,15 +125,13 @@
 			searchrecords.setMap(map);
 			displayCount(searchStr);
 		}
-  	}
+  }
 	
 	function clearSearch() {
 		if (searchrecords != null)
 			searchrecords.setMap(null);
 		if (addrMarker != null)
-			addrMarker.setMap(null);	
-		if (searchRadiusCircle != null)
-			searchRadiusCircle.setMap(null);
+			addrMarker.setMap(null);
 		
 		records.setMap(null);
 	}
@@ -212,6 +212,24 @@
         $( "#resultCount" ).html(addCommas(numRows) + " " + name + " found");
       });
 	  $( "#resultCount" ).fadeIn();
+	}
+	
+	function getTierNumber(searchStr) {
+	  //set the query using the parameter
+	  searchStr = searchStr.replace("SELECT geometry ","SELECT TIER ");
+	  
+	  //set the callback function
+	  getFTQuery(searchStr).send(displayTierNumber);
+	}
+	
+	function displayTierNumber(response) {
+	  var tier = "";
+	  if (response.getDataTable().getNumberOfRows() > 0)
+	  	tier = parseInt(response.getDataTable().getValue(0, 0));
+	  $( "#tierNumber" ).fadeOut(function() {
+        $( "#tierNumber" ).html("You are in tier " + tier + ".");
+      });
+	  $( "#tierNumber" ).fadeIn();
 	}
 	
 	function addCommas(nStr)
