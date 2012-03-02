@@ -39,7 +39,9 @@
 					<h4>What tier am I in? <span>(<a href='#' onclick="findMe(); return false;">find me</a>)</span></h4>
 				  <p><input class='txt hint' type="text" title="Enter an address or an intersection &hellip;" id="txtSearchAddress" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/></p>
 					
-					<p id="tierNumber"></p>
+					<input class="btn" type="button" id="btnSearch" value="Search" onclick="doSearch();" />
+					<span class='mute'><a href='#' onclick="initialize();">reset map</a></span>
+					<span id="tierNumber"></span>
 					
 					<hr/>
 					<h4>Filter by tier number</h4>
@@ -49,10 +51,7 @@
 						<li><span id=""><label for='cbType3'><input type='checkbox' id='cbType3' />Tier 3</label></span> </li>
 						<li><span id=""><label for='cbType4'><input type='checkbox' id='cbType4' />Tier 4</label></span> </li>
 					</ul>
-
-					<div class='clear'></div>
-					<input class="btn" type="button" id="btnSearch" value="Search" onclick="doSearch();" />
-					<span class='mute'><a href='#' onclick="initialize();">reset map</a></span>
+					
 					<span id='resultCount'>&nbsp;</span>
 					<hr />
 					<p class='mute'>View the raw data in Fusion Tables <a href='http://www.google.com/fusiontables/DataSource?dsrcid=3102026'>here</a>. 

@@ -170,4 +170,4 @@ td .options-h, td .options-v { margin: 0; }
 #label-red { color: #d73e3e; }
 
 #resultCount { float: right; font-weight: bold; font-size: 15px; margin-top: 8px; }
-#tierNumber { font-weight: bold; font-size: 15px; }
+#tierNumber { float: right; font-weight: bold; font-size: 15px; }
