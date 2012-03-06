@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>About - Chicago Public School Tiers</title>
+	<link href='styles/map.css' media='all' rel='stylesheet' type='text/css' /> 
+	<script src="/source/analytics_lib.js" type="text/javascript"></script>
+	<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+<body>
+	<div id="page"> 
+		<div class='content-simple'>
+			<ul id='header-nav'>
+				<li><a href="index.html">Home</a></li>
+				<li>About</li>
+			</ul>
+			<h1>About - Chicago Public School Tiers</h1>
+			<hr />
+			
+			<h2>Selective Schools in Chicago have Quotas</h2>
+      <p>In Chicago, a student's chance of getting into the city's top, selective schools<sup>[<a href='#footnote-1'>1</a>]</sup> depends on where he or she lives.</p>
+      
+      <p>That's because selective schools use admissions quotas: CPS requires them to reserve the same number of spots for students coming from poor and wealthy neighborhoods<sup>[<a href='#footnote-2'>2</a>]</sup>.</p>
+      
+      <p>If schools didn't do this, students from well-off places would be admitted in disproportionate numbers, because they tend to have better admissions scores<sup>[<a href='#footnote-3'>3</a>]</sup>.</p>
+      
+      <p>Rightly or wrongly, a quota keeps wealthier students from dominating selective schools. It makes it easier for applicants from poorer neighborhoods to get in than those from wealthier ones.</p>
+      
+      <p>The result: a high-achieving student from an impoverished area has a better chance of getting into a selective school than a similar student from a richer area.</p> 
+      
+      <h2 id="the-tier-system">The Tier System</h2>
+      <p>Here's how it all works: Chicago Public Schools places every part of the city into one of four socio-economic 'tiers'. They do this by looking at each area's median income, education level, home-ownership rates, single-parent family rates, and neighborhood school test scores<sup>[<a href="#footnote-4">4</a>]</sup>.</p> 
+      
+      <p>People living in Tier 1 areas tend to be poorer and have less education, while people living in Tier 4 areas are wealthier and more educated.</p>
+      
+      <table class='data'>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>2011-12 median income</th>
+            <th>2012-13 median income</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tier 1</td>
+            <td>$31,857</td>
+            <td>$28,017</td>
+          </tr>
+          <tr>
+            <td>Tier 2</td>
+            <td>$44,048</td>
+            <td>$39,476</td>
+          </tr>
+          <tr>
+            <td>Tier 3</td>
+            <td>$57,661</td>
+            <td>$52,987</td>
+          </tr>
+          <tr>
+            <td>Tier 4</td>
+            <td>$81,343</td>
+            <td>$77,651</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h2>How Selective Schools Use Tiers</h2>
+      <p>First off, it's important to understand that only 70% of the spots at selective schools work on the tier system. </p>
+      
+      <p>Schools give the remaining 30% to the city's highest-performing students, regardless of where they live. The students that fill these city-wide seats tend to live in wealthier, more educated parts of town.</p>
+      
+      <p>Each year, selective schools fill their tier seats by looking at applicants from each Tier in isolation, and offering enrollment to the top students within each Tier.</p>
+      
+      <p>Note: neighborhood and magnet schools use different admissions processes</p>
+      
+      <p>Say a school has 400 tier seats to fill. It will offer enrollment to the top 100 Tier 1 students, the top 100 Tier 2 students, and so on. </p>
+      
+      <p>In other words, students applying for one of these 400 tier spots will only compete with kids living in similar neighborhoods - not against every applicant in the city. This means that a kid from a poorer neighborhood could get into a selective high school with a lower admissions score than one from a richer area.</p> 
+      
+      <p>Consider Lane Tech College Prep, a prestigious selective enrollment high school on the North Side. In the admissions process for the upcoming 2012-2013 school year, Lane Tech rejected students from Tier 4 neighborhoods who had less than 840 out of 900 academic points. For Tier 1 students, though, the cutoff was 737. </p>
+      
+      <p>Every year, different selective schools will have <a href='http://cpsmagnet.org/ourpages/auto/2012/3/2/42650967/SEHS%20Cutoff%20Scores%202012-2013.pdf'>different cutoffs</a>. But the basic idea is the same: to ensure that students from disadvantaged backgrounds have a shot at getting into the city's top schools, and to make sure these schools have economically diverse student bodies.</p>
+      
+      
+      <h2>Where Did We Get The Data?</h2>
+      <p>CPS updates the Tiers periodically. They recently released a <a href='http://cpsmagnet.org/pdf/Census%20Tract%20--%20Tier%20Information.pdf'>document</a> that ties every census tract in the city to its Tier for the 2012-2013 selection process. We took this data and combined it with the most <a href='http://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Census-Tracts-2010/biqm-wjk3'>recent census tract boundaries</a> provided by the City of Chicago. </p> 
+      
+      <p>CPS also produced its own, static map of the Tiers, available <a href='http://cpsmagnet.org/apps/news/show_news.jsp?REC_ID=118406&id=0'>here</a>.</p>
+      
+      <h2>How Did We Make the Map? (For the Geeks)</h2>
+      <ul>
+        <li>This map was built using jQuery, Google Maps, and Google Fusion Tables. Fork the code here.</li>
+        <li>Interested in using Fusion Tables to build quick and dirty map apps? Check out Derek's <a href='http://derekeder.com/searchable_map_template/'>template</a>.</li>
+      </ul>
+      
+    <hr />
+    <h2>Footnotes</h2>
+    <ol>
+      <li id="footnote-1">
+        <p>There are three types of schools in the Chicago Public School system: neighborhood schools, selective schools, and magnet schools. </p>
+        <ul>
+          <li>A neighborhood school must enroll any student who lives within its boundary. Every student has a neighborhood school they can go to.</li>
+          <li>Selective schools, which admit students from across the city, are different. Students must apply to them, and no one is guaranteed a seat because of where they live. There's a bunch of different kinds: <a href='http://cpsmagnet.org/apps/news/show_news.jsp?REC_ID=118406&id=0'>High School International Baccalaureate Programs</a>, <a href='http://www.cps.edu/Schools/Elementary_schools/Pages/Regionalgiftedcenter.aspx'>Regional Gifted Centers</a>, <a href='http://www.cps.edu/Programs/Academic_and_enrichment/SelectiveEnrollment/Pages/Classical.aspx'>Classical Schools</a>, <a href='http://www.cps.edu/Programs/Academic_and_enrichment/SelectiveEnrollment/Pages/Academiccenters.aspx'>Academic Centers</a>, <a href='http://www.cps.edu/Programs/Academic_and_enrichment/SelectiveEnrollment/Pages/InternationaGiftedProgram.aspx'>International Gifted Programs</a> and <a href='http://www.cps.edu/Schools/High_schools/Pages/Selectiveenrollment.aspx'>Selective Enrollment High Schools</a>. The enrollment process is the same for all of them.</li>
+          <li>Magnet schools are in between: they admit students within their boundaries based on a lottery. Any leftover spots are opened up to students citywide based on the Tier system, much like a selective school. So nearby students are not guaranteed a seat, but they have much better chance of getting in.</li>
+        </ul>
+      </li>
+      <li id="footnote-2">
+        <p>In 1980, Chicago Public Schools and the U.S. Department of Justice signed a consent decree to desegregate the school system, overseen by the U.S. District Court. To carry it out, CPS adopted a racial quota system to govern enrollment in selective schools. In 2009, U.S. District Judge Charles Kocoras <a href='http://www.catalyst-chicago.org/notebook/2009/09/24/federal-judge-ends-chicago-schools-desegregation-decree'>ended the consent decree</a>, ruling that CPS could no longer use a student's race as an admissions factor.</p> 
+
+<p><a href='http://www.cps.edu/About_CPS/The_Board_of_Education/Pages/TheChicagoBoardofEducation.aspx'>The Chicago Board of Education</a>, which oversees CPS, quickly adopted the Tier system as a new way of creating social and economic diversity in the city's selective schools.</p></p>
+      </li>
+      <li id="footnote-3"><p>For the selective high schools, admissions scores are a combination of a student's 7th grade reading, math, science, social studies grades and ISAT scores.</li>
+      <li id="footnote-4"><p>CPS's <a href='http://policy.cps.k12.il.us/download.aspx?ID=82'>official policy</a> for admission into magnet and selective schools goes into excruciating detail about how Tiers are calculated.</li>
+    </ol>
+		<hr />
+		<p class='mute'>An <a href='http://opencityapps.org'>Open City</a> project by <a href='http://derekeder.com'>Derek Eder</a>, Forest Gregg and Juan-Pablo Velez.</p>
+		<br />
+		<br />
+		</div>
+	</div>
+</body>
+</html>

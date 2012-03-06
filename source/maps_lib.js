@@ -11,8 +11,8 @@
   var fusionTableId = 3102026; //replace this with the ID of your fusion table
   
   var searchRadius = 1; //in meters ~ 1/2 mile
-  var recordName = "tier";
-  var recordNamePlural = "tiers";
+  var recordName = "census tract";
+  var recordNamePlural = "census tracts";
   var searchrecords;
   var records = new google.maps.FusionTablesLayer(fusionTableId);
   

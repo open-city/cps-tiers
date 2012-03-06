@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Chicago Public School - Socio-Economic Tiers</title>
+<title>Chicago Public School Tiers</title>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -29,12 +29,16 @@
 </head>
 <body>
 		<div id="page"> 
-			<h1>Chicago Public School - Socio-Economic Tiers</h1>
+		  <ul id='header-nav'>
+				<li>Home</li>
+				<li><a href='about.html'>About</a></li>
+			</ul>
+			<h1>Chicago Public School Tiers <span>an <a href='http://opencityapps.org'>Open City</a> app</span></h1>
 			<hr />
 			<div class="content-secondary">
 
 				<div id='search'>
-					<p class='tagline'>Find what CPS tier your are in. Tiers are socio-economic categories that Chicago Public Schools uses to determine the academic ranking scored needed to get into a selective school</p>
+					<p class='tagline'>Tiers are socio-economic categories that Chicago Public Schools (CPS) uses to set the academic scores students need to get into a selective school. Find what CPS tier your are in. <a href='about.html'>More info &raquo;</a></p>
 					
 					<h4>What tier am I in? <span>(<a href='#' onclick="findMe(); return false;">find me</a>)</span></h4>
 				  <p><input class='txt hint' type="text" title="Enter an address or an intersection &hellip;" id="txtSearchAddress" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/></p>
@@ -44,18 +48,18 @@
 					<span id="tierNumber"></span>
 					
 					<hr/>
-					<h4>Filter by tier number</h4>
+					<h4>Filter by tier - median income (<a href='about.html#the-tier-system'>more info</a>)</h4>
 					<ul class='options-v'>
-						<li><span id=""><label for='cbType1'><input type='checkbox' id='cbType1' />Tier 1</label></span></li>
-						<li><span id=""><label for='cbType2'><input type='checkbox' id='cbType2' />Tier 2</label></span></li>
-						<li><span id=""><label for='cbType3'><input type='checkbox' id='cbType3' />Tier 3</label></span> </li>
-						<li><span id=""><label for='cbType4'><input type='checkbox' id='cbType4' />Tier 4</label></span> </li>
+						<li><span id=""><label for='cbType1'><input type='checkbox' id='cbType1' />Tier 1 - $28,017</label></span></li>
+						<li><span id=""><label for='cbType2'><input type='checkbox' id='cbType2' />Tier 2 - $39,476</label></span></li>
+						<li><span id=""><label for='cbType3'><input type='checkbox' id='cbType3' />Tier 3 - $52,987</label></span> </li>
+						<li><span id=""><label for='cbType4'><input type='checkbox' id='cbType4' />Tier 4 - $77,651</label></span> </li>
 					</ul>
 					
 					<span id='resultCount'>&nbsp;</span>
 					<hr />
-					<p class='mute'>View the raw data in Fusion Tables <a href='http://www.google.com/fusiontables/DataSource?dsrcid=3102026'>here</a>. 
-					<br />Map and search template by <a href='http://derekeder.com'>Derek Eder</a>.
+					<p class='mute'>Download the raw data <a href='http://www.google.com/fusiontables/DataSource?dsrcid=3102026'>here</a>. 
+					<br />An <a href='http://opencityapps.org'>Open City</a> project by <a href='http://derekeder.com'>Derek Eder</a>, Forest Gregg and Juan-Pablo Velez.</p>
 				</div>
 			</div>
 			<div class="content-primary">
