@@ -34,11 +34,6 @@
     };
     map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
 	
-	$("#cbType1").attr("checked", "checked");
-	$("#cbType2").attr("checked", "checked");
-	$("#cbType3").attr("checked", "checked");
-	$("#cbType4").attr("checked", "checked");
-	
 	searchrecords = null;
 	$("#txtSearchAddress").val("");
 	doSearch();
@@ -49,30 +44,7 @@
 		clearSearch();
 		var address = $("#txtSearchAddress").val();
 		
-		var type1 = $("#cbType1").is(':checked');
-		var type2 = $("#cbType2").is(':checked');
-		var type3 = $("#cbType3").is(':checked');
-		var type4 = $("#cbType4").is(':checked');
-		
 		searchStr = "SELECT geometry FROM " + fusionTableId + " WHERE geometry not equal to ''";
-		
-		//-----filter by type-------
-		//remove this if you don't have any types to filter
-		
-		//best way to filter results by a type is to create a 'type' column and assign each row a number (strings work as well, but numbers are faster). then we can use the 'IN' operator and return all that are selected
-		var searchType = "TIER IN (-1,";
-        if (type1)
-			searchType += "1,";
-		if (type2)
-			searchType += "2,";
-		if (type3)
-			searchType += "3,";
-		if (type4)
-			searchType += "4,";	
-
-        searchStr += " AND " + searchType.slice(0, searchType.length - 1) + ")";
-		
-		//-------end of filter by type code--------
 		
 		// because the geocode function does a callback, we have to handle it in both cases - when they search for and address and when they dont
 		if (address != "")
@@ -106,7 +78,7 @@
   					);
   			
   				searchrecords.setMap(map);
-  				displayCount(searchStr);
+  				//displayCount(searchStr);
   				getTierNumber(searchStr);
 			  } 
 			  else 

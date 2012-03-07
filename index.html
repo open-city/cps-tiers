@@ -37,27 +37,35 @@
 			<hr />
 			<div class="content-secondary">
 
-				<div id='search'>
-					<p class='tagline'>Tiers are socio-economic categories that Chicago Public Schools (CPS) uses to set the academic scores students need to get into a selective school. Find what CPS tier your are in. <a href='about.html'>More info &raquo;</a></p>
+				<div id='search'>					
+					<p>In Chicago, a student's chance of getting into the city's top, <a href='about.html#three-types'>selective schools</a> depends on where he or she lives.</p> 
+					<p>Chicago Public Schools places every part of the city into one of four <a href='about.html#the-tier-system'>socio-economic 'tiers'</a> by looking at each area's median income, education level, home-ownership rates, single-parent family rates, and neighborhood school test scores.</p> 
+					<p>People living in Tier 1 areas tend to be poorer and have less education, while people living in Tier 4 areas are wealthier and more educated. <a href='about.html'>More info &raquo;</a></p>
 					
+					<p>This tool helps you find what CPS tier your are in.</p>
+					
+					<h4>Tier legend (<a href='about.html#the-tier-system'>more info</a>)</h4>
+					<ol id='tiers-legend'>
+						<li id='legend-1'></li>
+						<li id='legend-2'></li>
+						<li id='legend-3'></li>
+						<li id='legend-4'></li>
+					</ol>
+					<ol id='tiers-number'>
+						<li>Tier 1</li>
+						<li>Tier 2</li>
+						<li>Tier 3</li>
+						<li>Tier 4</li>
+					</ol>
+
 					<h4>What tier am I in? <span>(<a href='#' onclick="findMe(); return false;">find me</a>)</span></h4>
 				  <p><input class='txt hint' type="text" title="Enter an address or an intersection &hellip;" id="txtSearchAddress" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/></p>
 					
 					<input class="btn" type="button" id="btnSearch" value="Search" onclick="doSearch();" />
 					<span class='mute'><a href='#' onclick="initialize();">reset map</a></span>
 					<span id="tierNumber"></span>
-					
-					<hr/>
-					<h4>Filter by tier - median income (<a href='about.html#the-tier-system'>more info</a>)</h4>
-					<ul class='options-v'>
-						<li><span id=""><label for='cbType1'><input type='checkbox' id='cbType1' />Tier 1 - $28,017</label></span></li>
-						<li><span id=""><label for='cbType2'><input type='checkbox' id='cbType2' />Tier 2 - $39,476</label></span></li>
-						<li><span id=""><label for='cbType3'><input type='checkbox' id='cbType3' />Tier 3 - $52,987</label></span> </li>
-						<li><span id=""><label for='cbType4'><input type='checkbox' id='cbType4' />Tier 4 - $77,651</label></span> </li>
-					</ul>
-					
-					<span id='resultCount'>&nbsp;</span>
 					<hr />
+					
 					<p class='mute'>Download the raw data <a href='http://www.google.com/fusiontables/DataSource?dsrcid=3102026'>here</a>. 
 					<br />An <a href='http://opencityapps.org'>Open City</a> project by <a href='http://derekeder.com'>Derek Eder</a>, Forest Gregg and Juan-Pablo Velez.</p>
 				</div>
