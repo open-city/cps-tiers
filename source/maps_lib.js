@@ -52,6 +52,7 @@
 			if (address.toLowerCase().indexOf("chicago") == -1)
 				address = address + " chicago";
 
+      _trackClickEventWithGA("Search", "CPS tiers", address);	
 			geocoder.geocode( { 'address': address}, function(results, status) 
 			{
 			  if (status == google.maps.GeocoderStatus.OK) 
