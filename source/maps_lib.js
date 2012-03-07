@@ -8,7 +8,7 @@
   var addrMarker;
   var addrMarkerImage = 'http://derekeder.com/images/icons/blue-pushpin.png';
   
-  var fusionTableId = 3102026; //replace this with the ID of your fusion table
+  var fusionTableId = 3153963; //replace this with the ID of your fusion table
   
   var searchRadius = 1; //in meters ~ 1/2 mile
   var recordName = "census tract";
@@ -204,6 +204,44 @@
 	  $( "#tierNumber" ).fadeIn();
 	}
 	
+	function getTierDemographics(tier) {
+	 var sql = "SELECT ";
+	 sql += "AVERAGE('TIER'), "
+	 sql += "AVERAGE('Median Family Income'), ";
+	 sql += "AVERAGE('Single Parent Families, rate'), ";
+	 sql += "AVERAGE('People over Five Years Old who Speak Language other than English at Home, rate'), ";
+	 sql += "AVERAGE('Homeowner Occupied Households, rate'), ";
+	 sql += "AVERAGE('People over 18 with less than HS Education, rate'), ";
+	 sql += "AVERAGE('People over 18 with HS Diploma or Equivalent, rate'), ";
+	 sql += "AVERAGE('People over 18 Some Post-HS Education, rate'), ";
+	 sql += "AVERAGE('People with a BA Degree or Higher, rate') ";
+	 sql += "FROM " + fusionTableId + " WHERE 'TIER' = " + tier;
+	 
+	  //set the callback function
+	  //console.log(getFTQuery(sql));
+	  getFTQuery(sql).send(displayTierDemographics);
+	}
+	
+	function displayTierDemographics(response) {
+	  var table = "";
+	  var numCols = response.getDataTable().getNumberOfColumns();
+	  var tier = response.getDataTable().getValue(0, 0);
+	  //console.log(numCols);
+	  if (response.getDataTable().getNumberOfRows() > 0) {
+	    table += "<td><strong>Tier&nbsp;" + tier + "</strong></td>";
+	  	table += "<td id='tier-" + tier + "-income'>" + response.getDataTable().getValue(0, 1) + "</td>";
+	  	
+	  	for(i = 2; i < numCols; i++) {
+	  	  table += "<td>" + toPercentage(response.getDataTable().getValue(0, i)) + "</td>";
+	  	}
+	   }
+	   
+	   //console.log("tier-" + response.getDataTable().getValue(0, 0) + "-demographics")
+	   //console.log(table);
+     $("#tier-" + tier + "-demographics").html(table);
+     $("#tier-" + tier + "-income").formatCurrency({roundToDecimalPlace: 0});
+	}
+	
 	function addCommas(nStr)
 	{
 		nStr += '';
@@ -215,4 +253,7 @@
 			x1 = x1.replace(rgx, '$1' + ',' + '$2');
 		}
 		return x1 + x2;
+	}
+	function toPercentage(nStr) {
+	 return (parseFloat(nStr) * 100).toFixed(1) + "%"
 	}
