@@ -106,7 +106,7 @@ ul.c2l, ul.c2r { list-style: none; margin-left: 0; }
 
 /* Muted text */
 .mute { color: #77787b; font-size: 12px; }
-p.mute { margin: 0; }
+p.mute { margin: 0.4em; }
 
 /* Text boxes */
   .ezpz-hint { color: #777; font-style: italic; }
