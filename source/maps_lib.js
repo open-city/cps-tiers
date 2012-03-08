@@ -11,19 +11,14 @@
   var fusionTableId = 3153963; //replace this with the ID of your fusion table
   
   var searchRadius = 1; //in meters ~ 1/2 mile
-  var recordName = "census tract";
-  var recordNamePlural = "census tracts";
   var searchrecords;
-  var records = new google.maps.FusionTablesLayer(fusionTableId);
-  
   var searchStr;
-  var searchRadiusCircle;
   
   google.load('visualization', '1', {}); //used for custom SQL call to get count
   
   function initialize() {
-	$( "#resultCount" ).html("");
-	$( "#tierNumber").html("");
+	  $( "#resultCount" ).html("");
+	  $( "#tierNumber").html("");
   
   	geocoder = new google.maps.Geocoder();
     var chicago = new google.maps.LatLng(41.850033, -87.6500523);
@@ -32,11 +27,11 @@
       center: chicago,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+    map = new google.maps.Map($("#map_canvas")[0],myOptions);
 	
-	searchrecords = null;
-	$("#txtSearchAddress").val("");
-	doSearch();
+	  searchrecords = null;
+	  $("#txtSearchAddress").val("");
+	  doSearch();
   }
 	
 	function doSearch() 
@@ -75,10 +70,12 @@
   				//get using all filters
   				//console.log(searchStr);
   				searchrecords = new google.maps.FusionTablesLayer(fusionTableId, {
-  					query: searchStr}
-  					);
+  					query: searchStr,
+  					map: map
+  				});
+  				
+  				enableMapTips();
   			
-  				searchrecords.setMap(map);
   				//displayCount(searchStr);
   				getTierNumber(searchStr);
 			  } 
@@ -92,11 +89,11 @@
 		{
 			//get using all filters
 			searchrecords = new google.maps.FusionTablesLayer(fusionTableId, {
-				query: searchStr}
-				);
-		
-			searchrecords.setMap(map);
-			displayCount(searchStr);
+				query: searchStr,
+				map: map
+		  });
+		  
+		  enableMapTips();
 		}
   }
 	
@@ -105,18 +102,18 @@
 			searchrecords.setMap(null);
 		if (addrMarker != null)
 			addrMarker.setMap(null);
-		
-		records.setMap(null);
 	}
 	
-	function refreshrecords() {
-		if (searchrecords != null)
-			searchrecords.setMap(map);
-		else
-			records.setMap(map);
+	function enableMapTips() {
+	    searchrecords.enableMapTips({
+    		select: 'TIER',
+    		from: fusionTableId,
+    		geometryColumn: 'geometry',
+    		delay: 100
+    	});
 	}
 
- function findMe() {
+  function findMe() {
 	  // Try W3C Geolocation (Preferred)
 	  var foundLocation;
 	  
@@ -132,59 +129,22 @@
 	}
 	
 	function addrFromLatLng(latLngPoint) {
-	    geocoder.geocode({'latLng': latLngPoint}, function(results, status) {
-	      if (status == google.maps.GeocoderStatus.OK) {
-	        if (results[1]) {
-	          $('#txtSearchAddress').val(results[1].formatted_address);
-	          $('.hint').focus();
-	          doSearch();
-	        }
-	      } else {
-	        alert("Geocoder failed due to: " + status);
-	      }
-	    });
-	  }
-	
-	function drawSearchRadiusCircle(point) {
-	    var circleOptions = {
-	      strokeColor: "#4b58a6",
-	      strokeOpacity: 0.3,
-	      strokeWeight: 1,
-	      fillColor: "#4b58a6",
-	      fillOpacity: 0.05,
-	      map: map,
-	      center: point,
-	      clickable: false,
-	      zIndex: -1,
-	      radius: parseInt(searchRadius)
-	    };
-	    searchRadiusCircle = new google.maps.Circle(circleOptions);
-	}
+    geocoder.geocode({'latLng': latLngPoint}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          $('#txtSearchAddress').val(results[1].formatted_address);
+          $('.hint').focus();
+          doSearch();
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
 	
 	function getFTQuery(sql) {
 		var queryText = encodeURIComponent(sql);
 		return new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq='  + queryText);
-	}
-	
-	function displayCount(searchStr) {
-	  //set the query using the parameter
-	  searchStr = searchStr.replace("SELECT geometry ","SELECT Count() ");
-	  
-	  //set the callback function
-	  getFTQuery(searchStr).send(displaySearchCount);
-	}
-
-	function displaySearchCount(response) {
-	  var numRows = 0;
-	  if (response.getDataTable().getNumberOfRows() > 0)
-	  	numRows = parseInt(response.getDataTable().getValue(0, 0));
-	  var name = recordNamePlural;
-	  if (numRows == 1)
-		name = recordName;
-	  $( "#resultCount" ).fadeOut(function() {
-        $( "#resultCount" ).html(addCommas(numRows) + " " + name + " found");
-      });
-	  $( "#resultCount" ).fadeIn();
 	}
 	
 	function getTierNumber(searchStr) {
@@ -200,7 +160,7 @@
 	  if (response.getDataTable().getNumberOfRows() > 0)
 	  	tier = parseInt(response.getDataTable().getValue(0, 0));
 	  $( "#tierNumber" ).fadeOut(function() {
-        $( "#tierNumber" ).html("You are in tier " + tier + ".");
+        $( "#tierNumber" ).html("You are in Tier " + tier);
       });
 	  $( "#tierNumber" ).fadeIn();
 	}
