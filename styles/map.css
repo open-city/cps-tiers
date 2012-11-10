@@ -85,8 +85,8 @@ ul.c2l, ul.c2r { list-style: none; margin-left: 0; }
   padding: 25px;
 }
 
-.content-primary { float: right; padding-left: 10px; width: 70%; height: 95%; }
-.content-secondary { float: left; width: 28%; }
+.content-primary { float: right; padding-left: 10px; width: 65%; height: 95%; }
+.content-secondary { float: left; width: 33%; }
 .content-home { margin: auto; padding: 50px 0; width: 710px; }
 .content-home h1 { width: 100%; }
 .home-left { float: left; width: 180px; padding: 0 5px; }
@@ -185,7 +185,14 @@ td .options-h, td .options-v { margin: 0; }
 
 #tiers-legend, #tiers-number { background: none; clear: both; margin-bottom: 0.3em; padding: 0; margin: 15px 0 0 0; list-style: none; }
 #tiers-legend li, #tiers-number li { width: 24%; float: left; margin: 0 1% 10px 0; white-space: nowrap; text-align: center; font-size: 14px; }
-#legend-1 { border-top: 10px solid #d9e3eb; }
-#legend-2 { border-top: 10px solid #c1d1df; }
-#legend-3 { border-top: 10px solid #a8bfd3; }
-#legend-4 { border-top: 10px solid #779bbc; }
+#legend-1 { border-top: 10px solid #bdd7e7; }
+#legend-2 { border-top: 10px solid #6baed6; }
+#legend-3 { border-top: 10px solid #3182bd; }
+#legend-4 { border-top: 10px solid #08519c; }
+
+/* Notifications */
+.flash { margin-bottom: 1em; }
+.flash p { list-style: none; margin: 0; }
+
+/* Confirmation */
+.flash .confirm { background: #e8f8d1; border: 2px solid #c8e999; padding: 0.7em; }

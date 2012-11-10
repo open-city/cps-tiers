@@ -21,7 +21,7 @@
   FusionTipOverlay.prototype.onAdd = function() {
     var div = document.createElement('DIV');
     div.style.border = "1px solid #999999";
-	div.style.opacity = ".85";
+  div.style.opacity = ".85";
     div.style.position = "absolute";
     div.style.whiteSpace = "nowrap";
     div.style.backgroundColor = "#ffffff";
@@ -217,41 +217,9 @@
       var swhere = "ST_INTERSECTS(" + opts.geometryColumn + ",RECTANGLE(LATLNG(" + bounds.getSouthWest().lat() + "," + bounds.getSouthWest().lng() + "),LATLNG(" + bounds.getNorthEast().lat() + "," + bounds.getNorthEast().lng() + ")))";
       var queryText = encodeURIComponent("SELECT " + opts.select + " FROM " + opts.from + " WHERE " + swhere);
       queryPending = true;
-      if (google.visualization) {
-        queryVisualization(latlng, queryText);
-      } else {
-        queryFusionJson(latlng, queryText);
-      }
+      queryFusionJson(latlng, queryText);
     }
     
-    function queryVisualization(latlng, queryText) {
-      var vquery = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
-      vquery.send(function(response) {
-        queryPending = false;
-        var data = response.getDataTable();
-        html = "";
-        var row = {};
-        if (data) {
-          var numRows = data.getNumberOfRows();
-          var numCols = data.getNumberOfColumns();
-          if (numRows > 0) {
-            for (i = 0; i < numCols; i++) {
-              html += "Tier " + data.getValue(0, i) + "<br/>";
-              var cell = {
-                columnName: data.getColumnLabel(i),
-                value: data.getValue(0, i)
-              };
-              row[data.getColumnLabel(i)] = cell;
-            }
-          }
-          
-        } else {
-          if (console) 
-            console.log('no data');
-        }
-        fireEvents(html, latlng, row);
-      });
-    }
     // IE does not like delete window[sid], so create a name space here.
     window.fusiontips = window.fusiontips||{};
     
@@ -281,8 +249,10 @@
         var numCols = data.cols.length;
         if (numRows > 0) {
           row = {};
+          
+          html += "Tier " + data.rows[0][0];
+
           for (i = 0; i < numCols; i++) {
-            html += data.rows[0][i] + "<br/>";
             var cell = {
               columnName: data.cols[i],
               value: data.rows[0][i]
@@ -353,6 +323,5 @@
   };
   
 })();
-
 
 
