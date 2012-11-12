@@ -34,7 +34,7 @@ var MapsLib = {
   recordName:         "tier",       //for showing number of results
   recordNamePlural:   "tiers", 
   
-  searchRadius:       1,            //in meters ~ 1/2 mile
+  searchRadius:       0.0001,            //in meters ~ 1/2 mile
   defaultZoom:        11,             //zoom level when map is loaded (bigger is more zoomed in)
   addrMarkerImage: 'http://derekeder.com/images/icons/blue-pushpin.png',
   currentPinpoint: null,
