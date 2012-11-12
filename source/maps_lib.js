@@ -74,7 +74,6 @@ var MapsLib = {
           MapsLib.currentPinpoint = results[0].geometry.location;
           
           $.address.parameter('address', encodeURIComponent(address));
-          $.address.parameter('radius', encodeURIComponent(MapsLib.searchRadius));
           map.setCenter(MapsLib.currentPinpoint);
           map.setZoom(14);
           
