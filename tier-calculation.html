@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>How the tiers are calculated - Chicago Public School Tiers</title>
+  <link href='styles/map.css' media='all' rel='stylesheet' type='text/css' /> 
+  <script src="source/analytics_lib.js" type="text/javascript"></script>
+</head>
+<body>
+  <div id="page"> 
+    <div class='content-simple'>
+      <ul id='header-nav'>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li>Tier calculation</li>
+      </ul>
+      <h1>How the tiers are calculated - Chicago Public School Tiers</h1>
+      <hr />
+      
+      <ul id="faq">
+            <li><a href="#dividing-the-city">Dividing the city</a></li>
+            <li><a href="#census-numbers">Census numbers</a></li>
+            <li><a href="#school-performance">School performance</a></li>
+            <li><a href="#weighting">Weighting</a></li>
+            <li><a href="#socioeconomic-score">Socioeconomic score</a></li>
+            <li><a href="#quartering">Quartering</a></li>
+            <li><a href="#references">References</a></li>
+      </ul>
+
+      <p>The school district follows a complicated recipe to assign different parts of
+      the city to one of four 'Tiers.'  We <strong>think</strong> we understand it from reverse engineering some publications that the district has released. </p>
+
+      <p>If any of this in error, or you would like to contribute to it, please <a href='mailto:info@opencityapps.org'>email us</a>.</p>
+
+      <h2 id='dividing-the-city'>Dividing the city</h2>
+
+      <p>First, the school district divides up the city into about 800 areas called census tracts. These 
+      tracts are small areas that the U.S. Census Burea uses for reporting data that the Census only collects
+      from a sample of households. The school district uses this sample data when they assign each tract a 
+      'Socioeconomic Score'</p>
+
+      <p>The Census Bureau also reports that data for smaller areas, and we do not know if there is a reason why the
+      school district chose census tracts instead of a smaller or larger area. On average a Chicago census tract 
+      is about twenty city blocks and has three thousand people.</p>
+
+      <h2 id='census-numbers'>Census numbers</h2>
+
+      <p>Four of the numbers that go into a tract's 'Socioeconomic Score' are simple and come directly from the Census.</p>
+
+      <ol>
+      <li>Median family income</li>
+      <li>Percent of households occupied by the owner </li>
+      <li>Percent of families headed by a single parent </li>
+      <li>Percent of households where a language other than English is spoken </li>
+      </ol><p>The district also uses census data to create a fifth 'Education attainment score.'</p>
+
+      <h2>Educational Attainment Score</h2>
+
+      <p>From the Census, the district finds the percentage of people over the age of 25 who have one of five different levels of education:</p>
+
+      <ul>
+      <li>Do not have high school diploma</li>
+      <li>High school diploma</li>
+      <li>Some college</li>
+      <li>College degree</li>
+      <li>Advanced degree</li>
+      </ul><p>The district then plugs these percentages into a formula to make an 'Educational Attainment Score.'
+      </p>
+
+      <pre>
+        Education Score = .2*(% Less than HS Diploma) 
+                          + 0.4*(% HS Diploma) 
+                          + 0.6*(% Some College) 
+                          + 0.8*(% Bachelors Degree) 
+                          + 1.0*(% Advanced Degree)
+      </pre>
+
+      <p>This score could range from 0.2, if no one graduated from high school, to 1.0 if
+      everyone has a graduate degree.  </p>
+
+      <h2 id='school-performance'>School performance</h2>
+
+      <p>The first version of the tier system only used census data, but the district added school performance to a tract's 'Socioeconomic Score' for the 2011 Admissions process. [<a href='#footnote'>footnote</a>]</p>
+
+      <p>The school performance variable is itself a complicated animal--a weighted average of schools' ISAT composite scores. </p>
+
+      <p>Let's start with explaining what an ISAT composite score is.</p>
+
+      <h2>ISAT Composite Score</h2>
+
+      <p>Chicago public elementary students take the
+      Illinois Standard Achievement Test (ISAT) every spring from third to
+      eighth grade. Every year, the students are tested in reading and math,
+      and in grade four and seven they are also tested in science. </p>
+
+      <p>To make the ISAT composite score, CPS looks at all reading, math, and science
+      tests, and calculates the percent of these tests where a student
+      met or exceeded Illinois's learning targets. So a score of 77% would
+      mean that 77% of the scores on tests in reading, math, and science met
+      or exceeded the state standards.</p>
+
+      <h2 id='weighting'>Weighting</h2>
+
+      <p>For student living in a given tract, CPS knows what schools the
+      students go to. To get a school performance variable for a tract, they
+      average the schools' ISAT composite scores, weighted by the fraction
+      of students attending each school.</p>
+
+      <p>So, let's say there were 300 elementary students in a given tract, and
+      they all went to one of two schools. A hundred of the students went to
+      a school with a composite ISAT score of 75 and 200 students went to a
+      school with a composite score of 60. The weighted composite score would be 65</p>
+
+      <pre>
+        <code>School Performance Variable = (100/300)*75 + (200/300)*60 = 65</code>
+      </pre>
+
+      <p>See <a href="http://cpsmagnet.org/ourpages/auto/2010/11/18/38613619/SEMagnetAdmissions_Principal_Presentation_draft_110210.pdf">Refinements to 2011-2012 Selective Enrollment and Magnet School Admission Policy</a> for more detals.</p>
+
+      <h2 id='socioeconomic-score'>Socioeconomic Score</h2>
+
+      <p>So now the district has six numbers for each tract: </p>
+
+      <ol>
+      <li>Median family income</li>
+      <li>Percent of households occupied by the owner </li>
+      <li>Percent of families headed by a single parent </li>
+      <li>Percent of households where a language other than English is spoken </li>
+      <li>'Educational attainment score'</li>
+      <li>Weighted ISAT composite score.</li>
+      </ol><p>Next, the district calculates the tracts percentile for each of these numbers. For example, that means that it ranks all the tracts by median family income. Then, for each tract, the district calculates how many tracts have <em>smaller</em> median family incomes. If a tract is the 75% percentile for median family income, that means that 75% of tracts have smaller median family incomes. </p>
+
+      <p>The district calculates the percentiles for all six numbers separately, and then adds up these
+      percentiles up to give each tract a 'Socioeconomic score'.</p>
+
+      <pre>
+        Socioeconomic Score = Percentile Median Income
+                              + Percentile Home Ownership
+                              + Percentile Education Score
+                              + Percentile Single-Parent Family
+                              + Percentile Non-English Speaking
+                              + Percentile School Performance Variable
+      </pre>
+
+      <p>For single-parent families, the percentile is the percentage of tracts with a <em>larger</em> proportion of single-parent households. The non-English speaking households percentile is also the percentage of tracts
+      with a <em>larger</em> proportion of non-English speaking households.</p>
+
+      <h2 id='quartering'>Quartering</h2>
+
+      <p>Once the district has given a 'Socioeconomic Score' to each tract, are sorted from lowest to high. Going from low score to high, the district puts tracts into Tier 1 until 25% of the city's school age children are in tier 1 (from the census, the district knows how many school age kids are in each tract). Once 25% of kids are in Tier 1, then the district adds tracts in order of socioeconomic score to Tier 2 until 25% of kids are in Tier 2. The same happens for Tiers 3 and 4.</p>
+
+      <h2 id='references'>References</h2>
+
+      <ul>
+        <li><a href="http://cpsmagnet.org/pdf/Summary%20of%20Census%20Tract%20Socioeconomic%20Data%20-%202009%2012%2001.pdf">2009 Summary of Census Tract Socioeconomic Data</a></li> 
+        <li><a href="http://cpsmagnet.org/ourpages/auto/2010/11/18/38613619/Summary%20of%20Census%20Tract%20Socioeconomic%20Data%20_with%20Number%20of%20School-Age%20Children_%202010%2012%2010.pdf">2010 Summary of Census Tract Socioeconomic Data</a></li>
+        <li><a href="http://www.selectiveenrollment.org/ourpages/auto/2012/3/20/61622979/Census%20Tract%20Data.pdf">2012 Summary of Census Tract Socioeconomic Data</a> </li>
+      </ul>
+
+      <hr />
+      <p id='footnote'>[footnote]
+      . In 2010, the Blue Ribbon
+      Commission evaluated the system and found that fewer black
+      students were being accepted. The commission recommended that a measure of
+      school performance be added to the tier system. In addition, they also
+      recommended that 70% of seats be allocated by tier instead of the
+      original 60%.</p>
+
+      <p><a href="http://cpsmagnet.org/ourpages/auto/2010/11/18/38613619/BRC%20Final%20Report%209%2022%2010.pdf">http://cpsmagnet.org/ourpages/auto/2010/11/18/38613619/BRC%20Final%20Report%209%2022%2010.pdf</a></p>
+      
+      <br />
+      <br />
+    </div>
+  </div>
+</body>
+</html>
