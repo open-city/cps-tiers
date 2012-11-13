@@ -190,6 +190,11 @@ td .options-h, td .options-v { margin: 0; }
 #legend-3 { border-top: 10px solid #3182bd; }
 #legend-4 { border-top: 10px solid #08519c; }
 
+#difference-1 { border-top: 10px solid #CA0020; }
+#difference-2 { border-top: 10px solid #eeeeee; }
+#difference-3 { border-top: 10px solid #0571B0; }
+#difference-4 { border-top: 10px solid #ffffff; }
+
 /* Notifications */
 .flash { margin-bottom: 1em; }
 .flash p { list-style: none; margin: 0; }

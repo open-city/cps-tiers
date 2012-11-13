@@ -18,7 +18,8 @@ var MapsLib = {
   
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "1suTSp6yMr_ZlKVw_fayo5ovcj960Ysm12wHSmnA",  
+  fusionTableId:      "1suTSp6yMr_ZlKVw_fayo5ovcj960Ysm12wHSmnA",
+  tierDiffTableId:    "1c8_4xQV7Vw21m5kDZqnD7Kz_QCOdrlXyF_RU4gc", 
   
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/   
   //*Important* this key is for demonstration purposes. please register your own.   
@@ -57,6 +58,23 @@ var MapsLib = {
      
     //run the default search
     MapsLib.doSearch();
+  },
+
+  initializeDiffMap: function() {
+    var myOptions = {
+      zoom: MapsLib.defaultZoom,
+      center: MapsLib.map_centroid,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map($("#map_canvas")[0],myOptions);
+    
+    MapsLib.searchrecords = new google.maps.FusionTablesLayer({
+      query: {
+        from:   MapsLib.tierDiffTableId,
+        select: MapsLib.locationColumn
+      }
+    });
+    MapsLib.searchrecords.setMap(map);
   },
   
   doSearch: function(location) {
