@@ -7,42 +7,42 @@
  * https://github.com/derekeder/FusionTable-Map-Template/wiki/License
  *
  * Date: 8/15/2012
- * 
+ *
  */
- 
+
 var MapsLib = MapsLib || {};
 var MapsLib = {
-  
+
   //Setup section - put your Fusion Table details here
   //Using the v1 Fusion Tables API. See https://developers.google.com/fusiontables/docs/v1/migration_guide for more info
-  
+
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
   fusionTableId:      "1suTSp6yMr_ZlKVw_fayo5ovcj960Ysm12wHSmnA",
-  tierDiffTableId:    "1c8_4xQV7Vw21m5kDZqnD7Kz_QCOdrlXyF_RU4gc", 
-  
-  //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/   
-  //*Important* this key is for demonstration purposes. please register your own.   
-  googleApiKey:       "AIzaSyAcsnDc7_YZskPj4ep3jT_fkpB3HI_1a98",        
-  
-  //name of the location column in your Fusion Table. 
-  //NOTE: if your location column name has spaces in it, surround it with single quotes 
+  tierDiffTableId:    "1c8_4xQV7Vw21m5kDZqnD7Kz_QCOdrlXyF_RU4gc",
+
+  //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
+  //*Important* this key is for demonstration purposes. please register your own.
+  googleApiKey:       "AIzaSyAcsnDc7_YZskPj4ep3jT_fkpB3HI_1a98",
+
+  //name of the location column in your Fusion Table.
+  //NOTE: if your location column name has spaces in it, surround it with single quotes
   //example: locationColumn:     "'my location'",
-  locationColumn:     "geometry",  
+  locationColumn:     "geometry",
 
   map_centroid:       new google.maps.LatLng(41.8781136, -87.66677856445312), //center that your map defaults to
   locationScope:      "chicago",      //geographical area appended to all address searches
   recordName:         "tier",       //for showing number of results
-  recordNamePlural:   "tiers", 
-  
+  recordNamePlural:   "tiers",
+
   searchRadius:       0.0001,            //in meters ~ 1/2 mile
   defaultZoom:        11,             //zoom level when map is loaded (bigger is more zoomed in)
   addrMarkerImage: 'http://derekeder.com/images/icons/blue-pushpin.png',
   currentPinpoint: null,
-  
+
   initialize: function() {
     $( "#tierNumber").html("");
-  
+
     geocoder = new google.maps.Geocoder();
     var myOptions = {
       zoom: MapsLib.defaultZoom,
@@ -50,12 +50,12 @@ var MapsLib = {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map($("#map_canvas")[0],myOptions);
-    
+
     MapsLib.searchrecords = null;
-    
+
     //reset filters
     $("#txtSearchAddress").val(MapsLib.convertToPlainString($.address.parameter('address')));
-     
+
     //run the default search
     MapsLib.doSearch();
   },
@@ -67,7 +67,7 @@ var MapsLib = {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map($("#map_canvas")[0],myOptions);
-    
+
     MapsLib.searchrecords = new google.maps.FusionTablesLayer({
       query: {
         from:   MapsLib.tierDiffTableId,
@@ -76,38 +76,44 @@ var MapsLib = {
     });
     MapsLib.searchrecords.setMap(map);
   },
-  
+
+  searchFor: function(address) {
+    $("#txtSearchAddress").val(address);
+    MapsLib.doSearch();
+    return false;
+  },
+
   doSearch: function(location) {
     MapsLib.clearSearch();
     var address = $("#txtSearchAddress").val();
 
     var whereClause = MapsLib.locationColumn + " not equal to ''";
-    
+
     if (address != "") {
       if (address.toLowerCase().indexOf(MapsLib.locationScope) == -1)
         address = address + " " + MapsLib.locationScope;
-  
+
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           MapsLib.currentPinpoint = results[0].geometry.location;
-          
+
           $.address.parameter('address', encodeURIComponent(address));
           map.setCenter(MapsLib.currentPinpoint);
           map.setZoom(14);
-          
+
           MapsLib.addrMarker = new google.maps.Marker({
-            position: MapsLib.currentPinpoint, 
-            map: map, 
+            position: MapsLib.currentPinpoint,
+            map: map,
             icon: MapsLib.addrMarkerImage,
             animation: google.maps.Animation.DROP,
             title:address
           });
-          
+
           whereClause += " AND ST_INTERSECTS(" + MapsLib.locationColumn + ", CIRCLE(LATLNG" + MapsLib.currentPinpoint.toString() + "," + MapsLib.searchRadius + "))";
-          
+
           MapsLib.submitSearch(whereClause, map, MapsLib.currentPinpoint);
           MapsLib.getTierNumber(whereClause);
-        } 
+        }
         else {
           alert("We could not find your address: " + status);
         }
@@ -117,7 +123,7 @@ var MapsLib = {
       MapsLib.submitSearch(whereClause, map);
     }
   },
-  
+
   submitSearch: function(whereClause, map, location) {
     //get using all filters
     MapsLib.searchrecords = new google.maps.FusionTablesLayer({
@@ -130,18 +136,18 @@ var MapsLib = {
     MapsLib.searchrecords.setMap(map);
     MapsLib.enableMapTips();
   },
-  
+
   clearSearch: function() {
     if (MapsLib.searchrecords != null)
       MapsLib.searchrecords.setMap(null);
     if (MapsLib.addrMarker != null)
-      MapsLib.addrMarker.setMap(null);  
+      MapsLib.addrMarker.setMap(null);
   },
-  
+
   findMe: function() {
     // Try W3C Geolocation (Preferred)
     var foundLocation;
-    
+
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         foundLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
@@ -152,7 +158,7 @@ var MapsLib = {
       alert("Sorry, we could not find your location.");
     }
   },
-  
+
   addrFromLatLng: function(latLngPoint) {
     geocoder.geocode({'latLng': latLngPoint}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
@@ -166,13 +172,13 @@ var MapsLib = {
       }
     });
   },
-  
+
   query: function(selectColumns, whereClause, callback) {
     var queryStr = [];
     queryStr.push("SELECT " + selectColumns);
     queryStr.push(" FROM " + MapsLib.fusionTableId);
     queryStr.push(" WHERE " + whereClause);
-  
+
     var sql = encodeURIComponent(queryStr.join(" "));
     $.ajax({url: "https://www.googleapis.com/fusiontables/v1/query?sql="+sql+"&callback="+callback+"&key="+MapsLib.googleApiKey, dataType: "jsonp"});
   },
@@ -197,18 +203,18 @@ var MapsLib = {
       delay: 100
     });
   },
-  
+
   displayCount: function(whereClause) {
     var selectColumns = "Count()";
     MapsLib.query(selectColumns, whereClause,"MapsLib.displaySearchCount");
   },
-  
-  displaySearchCount: function(json) { 
+
+  displaySearchCount: function(json) {
     MapsLib.handleError(json);
     var numRows = 0;
     if (json["rows"] != null)
       numRows = json["rows"][0];
-    
+
     var name = MapsLib.recordNamePlural;
     if (numRows == 1)
     name = MapsLib.recordName;
@@ -221,7 +227,7 @@ var MapsLib = {
   getTierNumber: function(whereClause) {
     MapsLib.query("'Tier 2012'", whereClause,"MapsLib.displayTierNumber");
   },
-  
+
   displayTierNumber: function(json) {
     MapsLib.handleError(json);
     var tier = "";
@@ -233,7 +239,7 @@ var MapsLib = {
       });
     $( "#tierNumber" ).fadeIn();
   },
-  
+
   getTierDemographics: function(tier) {
     var selectColumns = "AVERAGE('Tier 2012'), "
     selectColumns += "AVERAGE('Median Family Income'), ";
@@ -248,7 +254,7 @@ var MapsLib = {
     var whereClause = "'Tier 2012' = " + tier;
     MapsLib.query(selectColumns, whereClause,"MapsLib.displayTierDemographics");
   },
-  
+
   displayTierDemographics: function(json) {
     MapsLib.handleError(json);
     var table = "";
@@ -256,21 +262,21 @@ var MapsLib = {
     var cols = json["columns"];
     var tier = rows[0][0];
 
-    
+
     if (rows != null) {
       table += "<td><strong>Tier&nbsp;" + tier + "</strong></td>";
       table += "<td id='tier-" + tier + "-income'>" + rows[0][1] + "</td>";
-      
+
       for(i = 2; i < cols.length; i++) {
         table += "<td>" + MapsLib.toPercentage(rows[0][i]) + "</td>";
       }
      }
-     
+
      //console.log("tier-" + response.getDataTable().getValue(0, 0) + "-demographics")
      $("#tier-" + tier + "-demographics").html(table);
      $("#tier-" + tier + "-income").formatCurrency({roundToDecimalPlace: 0});
   },
-  
+
   addCommas: function(nStr) {
     nStr += '';
     x = nStr.split('.');
@@ -286,7 +292,7 @@ var MapsLib = {
   toPercentage: function(nStr) {
    return (parseFloat(nStr) * 100).toFixed(1) + "%"
   },
-  
+
   //converts a slug or query string in to readable text
   convertToPlainString: function(text) {
     if (text == undefined) return '';

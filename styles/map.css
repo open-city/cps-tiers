@@ -91,7 +91,7 @@ ul.c2l, ul.c2r { list-style: none; margin-left: 0; }
 .content-home h1 { width: 100%; }
 .home-left { float: left; width: 180px; padding: 0 5px; }
 .home-right { float: right; width: 500px; }
-.content-simple { margin: auto; width: 900px; } 
+.content-simple { margin: auto; width: 900px; }
 .content-simple  p { margin-top: .25em; }
 .content-simple li { margin-left: 2em; }
 
@@ -99,7 +99,7 @@ ul.c2l, ul.c2r { list-style: none; margin-left: 0; }
 	.full .content { background-image: none; }
 	.full .content-primary { float: none; margin: 0 auto; padding-top: 1em; width: 100%; }
 	.full .content-secondary { display: none; }
-	
+
 #map_canvas { height: 100%; width:100%; }
 #map_canvas img { float: right; padding-bottom: 8px; }
 #map_canvas h5 { clear: both; }
@@ -110,13 +110,13 @@ p.mute { margin: 0.4em; }
 
 /* Text boxes */
   .ezpz-hint { color: #777; font-style: italic; }
-  
+
 /* Tables */
 .data, .mceTable { width: 100%; }
 .data td, .data th, .mceTable td, .mceTable th { border: 1px solid #e3ebf6; padding: 0.5em; }
 .data th, .mceTable th { background: #e9f0f8; }
 .data thead th, .mceTable thead th { border: 1px solid #fff; }
-  
+
   /* Header nav */
 #header-nav { float: right; background: none; margin-bottom: 0.3em; padding: 0; margin: 0; list-style: none; }
 #header-nav li { float: left; margin: 0 0 0 1em; white-space: nowrap; text-align: center; font-size: 15px; }
@@ -130,7 +130,7 @@ input, select, textarea { color: #414042; font-size: 1em; }
 textarea { height: 10em; }
 #search { font-size: 16px; }
 #search .txt { width: 100%; }
-.input-addr { width: 70%; float: left; } 
+.input-addr { width: 70%; float: left; }
 .input-addr .txt { width: 100%; }
 .input-radius { width: 28%; float: right; }
 
@@ -201,6 +201,9 @@ td .options-h, td .options-v { margin: 0; }
 
 /* Confirmation */
 .flash .confirm { background: #e8f8d1; border: 2px solid #c8e999; padding: 0.7em; }
+
+/* Errors */
+.flash .warning { background: #fef5c6; border: 2px solid #ffcd36; padding: 0.7em; }
 
 code,
 pre {
