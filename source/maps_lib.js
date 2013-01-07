@@ -200,6 +200,7 @@ var MapsLib = {
       select: "'Tier 2012'",
       from: MapsLib.fusionTableId,
       geometryColumn: MapsLib.locationColumn,
+      googleApiKey: MapsLib.googleApiKey,
       delay: 100
     });
   },
