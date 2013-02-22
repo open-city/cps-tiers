@@ -183,7 +183,7 @@ td .options-h, td .options-v { margin: 0; }
 #resultCount { float: right; font-weight: bold; font-size: 15px; margin-top: 8px; }
 #tierNumber { float: right; font-weight: bold; font-size: 20px; margin-top: 8px; }
 
-#tiers-legend, #tiers-number { background: none; clear: both; margin-bottom: 0.3em; padding: 0; margin: 15px 0 0 0; list-style: none; }
+#tiers-legend, #tiers-number { background: none; clear: both; margin-bottom: 0.3em; padding: 0; margin: 0; list-style: none; }
 #tiers-legend li, #tiers-number li { width: 24%; float: left; margin: 0 1% 10px 0; white-space: nowrap; text-align: center; font-size: 14px; }
 #legend-1 { border-top: 10px solid #bdd7e7; }
 #legend-2 { border-top: 10px solid #6baed6; }

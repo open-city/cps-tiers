@@ -228,7 +228,7 @@
     function queryFusionJson(latlng, queryText) {
       var script = document.createElement('script');
       // Note that a simplified geometry and the NAME column are being requested
-      //http://www.google.com/fusiontables/api/query?sql=
+      //http://www.fusiontables.googleusercontent.com/fusiontables/api/query?sql=
       var sid = 'query_' + scriptid++;
       script.setAttribute('src', 'https://www.googleapis.com/fusiontables/v1/query?sql=' + queryText + '&callback=fusiontips.' + sid + '&key=' + opts.googleApiKey + "&typed=false");
       //script.setAttribute('src', 'http://fusiontables.googleusercontent.com/fusiontables/api/query?sql=' + queryText + '&jsonCallback=fusiontips.' + sid);
