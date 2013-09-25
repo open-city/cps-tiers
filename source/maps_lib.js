@@ -18,8 +18,7 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "1uK4BppYRp6CEeCV-s3eXJWGfeF-jWJnduNcyOAY",
-  tierDiffTableId:    "1Rom2hCkEpDkOJ8fs1SyJNMmXx8o-yju3HoB5N2g",
+  fusionTableId:      "1ERYewcgm47fWnMA4VUEfaVlm-Tm5ZPTQnvQGq98",
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -86,11 +85,11 @@ var MapsLib = {
 
     MapsLib.searchrecords = new google.maps.FusionTablesLayer({
       query: {
-        from:   MapsLib.tierDiffTableId,
+        from:   MapsLib.fusionTableId,
         select: MapsLib.locationColumn
       },
-     styleId: 2,
-     templateId: 2
+     styleId: 3,
+     templateId: 3
     });
     MapsLib.searchrecords.setMap(map);
   },
@@ -217,7 +216,7 @@ var MapsLib = {
 
   enableMapTips: function () {
     MapsLib.searchrecords.enableMapTips({
-      select: "'Tier 2012'",
+      select: "'Tier 2013'",
       from: MapsLib.fusionTableId,
       geometryColumn: MapsLib.locationColumn,
       googleApiKey: MapsLib.googleApiKey,
@@ -246,7 +245,7 @@ var MapsLib = {
   },
 
   getTierNumber: function(whereClause) {
-    MapsLib.query("'Tier 2012'", whereClause,"MapsLib.displayTierNumber");
+    MapsLib.query("'Tier 2013'", whereClause,"MapsLib.displayTierNumber");
   },
 
   displayTierNumber: function(json) {
@@ -262,7 +261,7 @@ var MapsLib = {
   },
 
   getTierDemographics: function(tier) {
-    var selectColumns = "AVERAGE('Tier 2012'), "
+    var selectColumns = "AVERAGE('Tier 2013'), "
     selectColumns += "AVERAGE('Median Family Income'), ";
     selectColumns += "AVERAGE('Single Parent Families, rate'), ";
     selectColumns += "AVERAGE('People over Five Years Old who Speak Language other than English at Home, rate'), ";
@@ -272,7 +271,7 @@ var MapsLib = {
     selectColumns += "AVERAGE('People over 18 Some Post-HS Education, rate'), ";
     selectColumns += "AVERAGE('People with a BA Degree or Higher, rate') ";
 
-    var whereClause = "'Tier 2012' = " + tier;
+    var whereClause = "'Tier 2013' = " + tier;
     MapsLib.query(selectColumns, whereClause,"MapsLib.displayTierDemographics");
   },
 
