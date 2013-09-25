@@ -18,8 +18,8 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "1suTSp6yMr_ZlKVw_fayo5ovcj960Ysm12wHSmnA",
-  tierDiffTableId:    "1c8_4xQV7Vw21m5kDZqnD7Kz_QCOdrlXyF_RU4gc",
+  fusionTableId:      "1uK4BppYRp6CEeCV-s3eXJWGfeF-jWJnduNcyOAY",
+  tierDiffTableId:    "1Rom2hCkEpDkOJ8fs1SyJNMmXx8o-yju3HoB5N2g",
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -47,7 +47,15 @@ var MapsLib = {
     var myOptions = {
       zoom: MapsLib.defaultZoom,
       center: MapsLib.map_centroid,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: [
+        {
+          stylers: [
+            { saturation: -100 },
+            { lightness: 40 }
+          ]
+        }
+      ]
     };
     map = new google.maps.Map($("#map_canvas")[0],myOptions);
 
@@ -64,7 +72,15 @@ var MapsLib = {
     var myOptions = {
       zoom: MapsLib.defaultZoom,
       center: MapsLib.map_centroid,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: [
+        {
+          stylers: [
+            { saturation: -100 },
+            { lightness: 40 }
+          ]
+        }
+      ]
     };
     map = new google.maps.Map($("#map_canvas")[0],myOptions);
 
@@ -72,7 +88,9 @@ var MapsLib = {
       query: {
         from:   MapsLib.tierDiffTableId,
         select: MapsLib.locationColumn
-      }
+      },
+     styleId: 2,
+     templateId: 2
     });
     MapsLib.searchrecords.setMap(map);
   },
@@ -131,7 +149,9 @@ var MapsLib = {
         from:   MapsLib.fusionTableId,
         select: MapsLib.locationColumn,
         where:  whereClause
-      }
+      },
+     styleId: 2,
+     templateId: 2
     });
     MapsLib.searchrecords.setMap(map);
     MapsLib.enableMapTips();

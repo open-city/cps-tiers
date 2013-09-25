@@ -190,10 +190,13 @@ td .options-h, td .options-v { margin: 0; }
 #legend-3 { border-top: 10px solid #3182bd; }
 #legend-4 { border-top: 10px solid #08519c; }
 
+#difference-legend, #difference-number { background: none; clear: both; margin-bottom: 0.3em; padding: 0; margin: 0; list-style: none; }
+#difference-legend li, #difference-number li { width: 19%; float: left; margin: 0 1% 10px 0; white-space: nowrap; text-align: center; font-size: 14px; }
 #difference-1 { border-top: 10px solid #CA0020; }
-#difference-2 { border-top: 10px solid #eeeeee; }
-#difference-3 { border-top: 10px solid #92c5de; }
-#difference-4 { border-top: 10px solid #0571B0; }
+#difference-2 { border-top: 10px solid #f4a582; }
+#difference-3 { border-top: 10px solid #eeeeee; }
+#difference-4 { border-top: 10px solid #92c5de; }
+#difference-5 { border-top: 10px solid #0571B0; }
 
 /* Notifications */
 .flash { margin-bottom: 1em; }
