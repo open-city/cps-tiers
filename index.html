@@ -50,12 +50,6 @@
 
 					<p>This tool <a href='about.html#disclaimer'>helps</a> you find what CPS tier you are in.</p>
 
-					<div class='flash'>
-						<div class='confirm'>
-							<p><strong>Tier update!</strong> We've updated this site with tiers for the 2014-2015 school year. See the <a href='http://www.cpsoae.org/apps/news/show_news.jsp?REC_ID=184188&id=0'>official CPS site for more</a>.</p>
-						</div>
-					</div>
-
 					<h4>What tier am I in? <span>(<a href='#' onclick="MapsLib.findMe(); return false;">find me</a>)</span></h4>
 				  <p><input class='txt hint' type="text" title="Enter an address &hellip;" id="txtSearchAddress" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/></p>
 
@@ -79,7 +73,14 @@
 					</ol>
 
 					<hr />
-					<p class='mute'>Download the raw data <a href='http://www.google.com/fusiontables/DataSource?docid=1ERYewcgm47fWnMA4VUEfaVlm-Tm5ZPTQnvQGq98'>here</a>.</p>
+
+					<div class='flash'>
+						<div class='warning'>
+							<p><strong>Showing 2010 Census data</strong> This site shows 2010 Census demographic data. CPS <a href='http://cpstiers.opencityapps.org/tier-calculation.html#footnote-1'>uses more current 2012 data</a> for their calculations.</p>
+						</div>
+					</div>
+
+					
 					<p class='mute'>An <a href='http://opencityapps.org'>Open City</a> app by Derek Eder, Forest Gregg, Juan-Pablo Velez and Josh Kalov.</p>
 					<p class='mute'><a href='mailto:cpstiers@opencityapps.org'>Send us feedback</a> or Tweet us at <a href='http://twitter.com/opencityapps'>@opencityapps</a></p>
 				</div>
