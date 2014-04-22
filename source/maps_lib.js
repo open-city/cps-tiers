@@ -18,7 +18,7 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "1ERYewcgm47fWnMA4VUEfaVlm-Tm5ZPTQnvQGq98",
+  fusionTableId:      "11PNEL-A6MFtYLLGvgtHqK7K1Pm4viKiK9IHY0tYf",
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -262,14 +262,13 @@ var MapsLib = {
 
   getTierDemographics: function(tier) {
     var selectColumns = "AVERAGE('Tier 2013'), "
-    selectColumns += "AVERAGE('Median Family Income'), ";
-    selectColumns += "AVERAGE('Single Parent Families, rate'), ";
-    selectColumns += "AVERAGE('People over Five Years Old who Speak Language other than English at Home, rate'), ";
-    selectColumns += "AVERAGE('Homeowner Occupied Households, rate'), ";
-    selectColumns += "AVERAGE('People over 18 with less than HS Education, rate'), ";
-    selectColumns += "AVERAGE('People over 18 with HS Diploma or Equivalent, rate'), ";
-    selectColumns += "AVERAGE('People over 18 Some Post-HS Education, rate'), ";
-    selectColumns += "AVERAGE('People with a BA Degree or Higher, rate') ";
+    selectColumns += "AVERAGE('Estimated Median Family Income'),";
+    selectColumns += "AVERAGE('% of Single Parent Households'),";
+    selectColumns += "AVERAGE('% of Population Speaking a Language Other than English'),";
+    selectColumns += "AVERAGE('% of Owner Occupied Homes'),";
+    selectColumns += "AVERAGE('Educational Attainment Score'),";
+    selectColumns += "AVERAGE('Weighted Average ISAT Performance at Attendance Area Schools'),";
+    selectColumns += "AVERAGE('Number of School Age Children')";
 
     var whereClause = "'Tier 2013' = " + tier;
     MapsLib.query(selectColumns, whereClause,"MapsLib.displayTierDemographics");
