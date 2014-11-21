@@ -18,7 +18,7 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "11PNEL-A6MFtYLLGvgtHqK7K1Pm4viKiK9IHY0tYf",
+  fusionTableId:      "1nmgAHmScgIDoetvgSNVD1y6hBCrGmXg32-uH4Mjh",
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -216,7 +216,7 @@ var MapsLib = {
 
   enableMapTips: function () {
     MapsLib.searchrecords.enableMapTips({
-      select: "'Tier 2013'",
+      select: "'Tier 2015-2016'",
       from: MapsLib.fusionTableId,
       geometryColumn: MapsLib.locationColumn,
       googleApiKey: MapsLib.googleApiKey,
@@ -245,7 +245,7 @@ var MapsLib = {
   },
 
   getTierNumber: function(whereClause) {
-    MapsLib.query("'Tier 2013'", whereClause,"MapsLib.displayTierNumber");
+    MapsLib.query("'Tier 2015-2016'", whereClause,"MapsLib.displayTierNumber");
   },
 
   displayTierNumber: function(json) {
@@ -261,16 +261,16 @@ var MapsLib = {
   },
 
   getTierDemographics: function(tier) {
-    var selectColumns = "AVERAGE('Tier 2013'), "
+    var selectColumns = "AVERAGE('Tier 2015-2016'), "
     selectColumns += "AVERAGE('Estimated Median Family Income'),";
+    selectColumns += "AVERAGE('Number of School Age Children'), ";
     selectColumns += "AVERAGE('% of Single Parent Households'),";
     selectColumns += "AVERAGE('% of Population Speaking a Language Other than English'),";
     selectColumns += "AVERAGE('% of Owner Occupied Homes'),";
     selectColumns += "AVERAGE('Educational Attainment Score'),";
-    selectColumns += "AVERAGE('Weighted Average ISAT Performance at Attendance Area Schools'),";
-    selectColumns += "AVERAGE('Number of School Age Children')";
+    selectColumns += "AVERAGE('Weighted Average ISAT Performance at Attendance Area Schools')";
 
-    var whereClause = "'Tier 2013' = " + tier;
+    var whereClause = "'Tier 2015-2016' = " + tier;
     MapsLib.query(selectColumns, whereClause,"MapsLib.displayTierDemographics");
   },
 
@@ -285,8 +285,9 @@ var MapsLib = {
     if (rows != null) {
       table += "<td><strong>Tier&nbsp;" + tier + "</strong></td>";
       table += "<td id='tier-" + tier + "-income'>" + rows[0][1] + "</td>";
+      table += "<td>" + parseInt(rows[0][2]) + "</td>";
 
-      for(i = 2; i < cols.length; i++) {
+      for(i = 3; i < cols.length; i++) {
         table += "<td>" + MapsLib.toPercentage(rows[0][i]) + "</td>";
       }
      }
