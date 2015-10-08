@@ -18,7 +18,7 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "1nmgAHmScgIDoetvgSNVD1y6hBCrGmXg32-uH4Mjh",
+  fusionTableId:      "1rzuq7pJU-CueotdsMm6VvRkVFkiIuR3evRDwOrFf",
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -88,8 +88,8 @@ var MapsLib = {
         from:   MapsLib.fusionTableId,
         select: MapsLib.locationColumn
       },
-     styleId: 3,
-     templateId: 3
+     styleId: 4,
+     templateId: 4
     });
     MapsLib.searchrecords.setMap(map);
   },
@@ -216,7 +216,7 @@ var MapsLib = {
 
   enableMapTips: function () {
     MapsLib.searchrecords.enableMapTips({
-      select: "'Tier 2015-2016'",
+      select: "'Tier 2016-2017'",
       from: MapsLib.fusionTableId,
       geometryColumn: MapsLib.locationColumn,
       googleApiKey: MapsLib.googleApiKey,
@@ -245,7 +245,7 @@ var MapsLib = {
   },
 
   getTierNumber: function(whereClause) {
-    MapsLib.query("'Tier 2015-2016'", whereClause,"MapsLib.displayTierNumber");
+    MapsLib.query("'Tier 2016-2017'", whereClause,"MapsLib.displayTierNumber");
   },
 
   displayTierNumber: function(json) {
@@ -261,16 +261,16 @@ var MapsLib = {
   },
 
   getTierDemographics: function(tier) {
-    var selectColumns = "AVERAGE('Tier 2015-2016'), "
+    var selectColumns = "AVERAGE('Tier 2016-2017'), "
     selectColumns += "AVERAGE('Estimated Median Family Income'),";
     selectColumns += "AVERAGE('Number of School Age Children'), ";
     selectColumns += "AVERAGE('% of Single Parent Households'),";
     selectColumns += "AVERAGE('% of Population Speaking a Language Other than English'),";
     selectColumns += "AVERAGE('% of Owner Occupied Homes'),";
     selectColumns += "AVERAGE('Educational Attainment Score'),";
-    selectColumns += "AVERAGE('Weighted Average ISAT Performance at Attendance Area Schools')";
+    selectColumns += "AVERAGE('Weighted Average NWEA Performance at Attendance Area Schools')";
 
-    var whereClause = "'Tier 2015-2016' = " + tier;
+    var whereClause = "'Tier 2016-2017' = " + tier;
     MapsLib.query(selectColumns, whereClause,"MapsLib.displayTierDemographics");
   },
 

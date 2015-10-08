@@ -48,18 +48,7 @@
 			<div class="content-secondary">
 
 				<div id='search'>
-					<p>In Chicago, a student's chance of getting into the city's top, <a href='about.html#four-types'>selective schools</a> depends on where he or she lives.</p>
-					<p>Chicago Public Schools (CPS) places every part of the city into one of four <a href='about.html#the-tier-system'>socio-economic "tiers."</a> On average, people from Tier 1 areas make less money and have less education, and people from Tier 4 areas make more money and have more education.</p>
-
-					<p>This tool <a href='about.html#disclaimer'>helps</a> you find what CPS tier you are in.</p>
-
-					<div class='flash'>
-						<div class='warning'>
-							<p><strong>New tiers coming soon!</strong> CPS released tiers for 2016-2017 enrollment. We'll update this site with them soon. See the <a href='http://www.cpsoae.org/apps/news/show_news.jsp?REC_ID=184188&id=0'>official CPS site for more</a>.</p>
-						</div>
-					</div>
-
-					<h4>What tier am I in? <span>(<a href='#' onclick="MapsLib.findMe(); return false;">find me</a>)</span></h4>
+				  <h4>What tier am I in? <span>(<a href='#' onclick="MapsLib.findMe(); return false;">find me</a>)</span></h4>
 				  <p><input class='txt hint' type="text" title="Enter an address &hellip;" id="txtSearchAddress" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/></p>
 
 					<input class="btn" type="button" id="btnSearch" value="Search" onclick="MapsLib.doSearch();" />
@@ -82,6 +71,17 @@
 					</ol>
 
 					<hr />
+
+					<div class='flash'>
+						<div class='confirm'>
+							<p><strong>2016-2017 enrollment tiers added!</strong> We are now showing the tiers for 2016-2017 enrollment. See the <a href='http://www.cpsoae.org/apps/news/show_news.jsp?REC_ID=184188&id=0'>official CPS site for more info</a>.</p>
+						</div>
+					</div>
+
+					<p>In Chicago, a student's chance of getting into the city's top, <a href='about.html#four-types'>selective schools</a> depends on where he or she lives.</p>
+					<p>Chicago Public Schools (CPS) places every part of the city into one of four <a href='about.html#the-tier-system'>socio-economic "tiers."</a> On average, people from Tier 1 areas make less money and have less education, and people from Tier 4 areas make more money and have more education.</p>
+
+					<p>This tool <a href='about.html#disclaimer'>helps</a> you find what CPS tier you are in.</p>
 					
 					<p class='mute'>An <a href='http://opencityapps.org'>Open City</a> app by Derek Eder and Forest Gregg with contributions from Juan-Pablo Velez and Josh Kalov.</p>
 					<p class='mute'><a href='mailto:cpstiers@opencityapps.org'>Send us feedback</a> or Tweet us at <a href='http://twitter.com/opencityapps'>@opencityapps</a></p>
