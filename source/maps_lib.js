@@ -18,7 +18,7 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "1rzuq7pJU-CueotdsMm6VvRkVFkiIuR3evRDwOrFf",
+  fusionTableId:      "1-DM022Sc6ZiUBWQTx5M8cJBUh6xN7Kt4KnQBf3o4",
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -88,8 +88,8 @@ var MapsLib = {
         from:   MapsLib.fusionTableId,
         select: MapsLib.locationColumn
       },
-     styleId: 4,
-     templateId: 4
+     styleId: 3,
+     templateId: 3
     });
     MapsLib.searchrecords.setMap(map);
   },
