@@ -216,7 +216,7 @@ var MapsLib = {
 
   enableMapTips: function () {
     MapsLib.searchrecords.enableMapTips({
-      select: "'Tier 2016-2017'",
+      select: "'Tier 2017-2018'",
       from: MapsLib.fusionTableId,
       geometryColumn: MapsLib.locationColumn,
       googleApiKey: MapsLib.googleApiKey,
@@ -245,7 +245,7 @@ var MapsLib = {
   },
 
   getTierNumber: function(whereClause) {
-    MapsLib.query("'Tier 2016-2017'", whereClause,"MapsLib.displayTierNumber");
+    MapsLib.query("'Tier 2017-2018'", whereClause,"MapsLib.displayTierNumber");
   },
 
   displayTierNumber: function(json) {
@@ -261,7 +261,7 @@ var MapsLib = {
   },
 
   getTierDemographics: function(tier) {
-    var selectColumns = "AVERAGE('Tier 2016-2017'), "
+    var selectColumns = "AVERAGE('Tier 2017-2018'), "
     selectColumns += "AVERAGE('Estimated Median Family Income'),";
     selectColumns += "AVERAGE('Number of School Age Children'), ";
     selectColumns += "AVERAGE('% of Single Parent Households'),";
@@ -270,7 +270,7 @@ var MapsLib = {
     selectColumns += "AVERAGE('Educational Attainment Score'),";
     selectColumns += "AVERAGE('Weighted Average NWEA Performance at Attendance Area Schools')";
 
-    var whereClause = "'Tier 2016-2017' = " + tier;
+    var whereClause = "'Tier 2017-2018' = " + tier;
     MapsLib.query(selectColumns, whereClause,"MapsLib.displayTierDemographics");
   },
 
