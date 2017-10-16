@@ -18,7 +18,7 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "1-DM022Sc6ZiUBWQTx5M8cJBUh6xN7Kt4KnQBf3o4",
+  fusionTableId:      "1JwN7NZzX1P0qZR_NfKSXOtHGzFRfQOZS-oidMesR",
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -88,8 +88,8 @@ var MapsLib = {
         from:   MapsLib.fusionTableId,
         select: MapsLib.locationColumn
       },
-     styleId: 3,
-     templateId: 3
+     styleId: 4,
+     templateId: 5
     });
     MapsLib.searchrecords.setMap(map);
   },
@@ -150,7 +150,7 @@ var MapsLib = {
         where:  whereClause
       },
      styleId: 2,
-     templateId: 2
+     templateId: 3
     });
     MapsLib.searchrecords.setMap(map);
     MapsLib.enableMapTips();
@@ -216,7 +216,7 @@ var MapsLib = {
 
   enableMapTips: function () {
     MapsLib.searchrecords.enableMapTips({
-      select: "'Tier 2017-2018'",
+      select: "'Tier 2017'",
       from: MapsLib.fusionTableId,
       geometryColumn: MapsLib.locationColumn,
       googleApiKey: MapsLib.googleApiKey,
@@ -245,7 +245,7 @@ var MapsLib = {
   },
 
   getTierNumber: function(whereClause) {
-    MapsLib.query("'Tier 2017-2018'", whereClause,"MapsLib.displayTierNumber");
+    MapsLib.query("'Tier 2017'", whereClause,"MapsLib.displayTierNumber");
   },
 
   displayTierNumber: function(json) {
@@ -261,16 +261,16 @@ var MapsLib = {
   },
 
   getTierDemographics: function(tier) {
-    var selectColumns = "AVERAGE('Tier 2017-2018'), "
-    selectColumns += "AVERAGE('Estimated Median Family Income'),";
+    var selectColumns = "AVERAGE('Tier 2017'), "
+    selectColumns += "AVERAGE('Estimated Median Family Income Cumulative Percentage'),";
     selectColumns += "AVERAGE('Number of School Age Children'), ";
-    selectColumns += "AVERAGE('% of Single Parent Households'),";
-    selectColumns += "AVERAGE('% of Population Speaking a Language Other than English'),";
-    selectColumns += "AVERAGE('% of Owner Occupied Homes'),";
-    selectColumns += "AVERAGE('Educational Attainment Score'),";
-    selectColumns += "AVERAGE('Weighted Average NWEA Performance at Attendance Area Schools')";
+    selectColumns += "AVERAGE('% of Single Parent Households Cumulative Percentage'),";
+    selectColumns += "AVERAGE('% of Population Speaking a Language Other than English Cumulative Percentage'),";
+    selectColumns += "AVERAGE('% of Owner Occupied Homes Cumulative Percentage'),";
+    selectColumns += "AVERAGE('Educational Attainment Score Cumulative Percentage'),";
+    selectColumns += "AVERAGE('Weighted Average NWEA Performance at Attendance Area Schools Cumulative Percentage')";
 
-    var whereClause = "'Tier 2017-2018' = " + tier;
+    var whereClause = "'Tier 2017' = " + tier;
     MapsLib.query(selectColumns, whereClause,"MapsLib.displayTierDemographics");
   },
 
@@ -284,7 +284,7 @@ var MapsLib = {
 
     if (rows != null) {
       table += "<td><strong>Tier&nbsp;" + tier + "</strong></td>";
-      table += "<td id='tier-" + tier + "-income'>" + rows[0][1] + "</td>";
+      table += "<td id='tier-" + tier + "-income'>" + MapsLib.toPercentage(rows[0][1]) + "</td>";
       table += "<td>" + parseInt(rows[0][2]) + "</td>";
 
       for(i = 3; i < cols.length; i++) {
@@ -294,7 +294,7 @@ var MapsLib = {
 
      //console.log("tier-" + response.getDataTable().getValue(0, 0) + "-demographics")
      $("#tier-" + tier + "-demographics").html(table);
-     $("#tier-" + tier + "-income").formatCurrency({roundToDecimalPlace: 0});
+     // $("#tier-" + tier + "-income").formatCurrency({roundToDecimalPlace: 0});
   },
 
   addCommas: function(nStr) {
