@@ -53,6 +53,13 @@ var MapsLib = {
             { saturation: -100 },
             { lightness: 40 }
           ]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
         }
       ]
     };
@@ -77,6 +84,13 @@ var MapsLib = {
           stylers: [
             { saturation: -100 },
             { lightness: 40 }
+          ]
+        },
+        {
+          featureType: "poi",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
           ]
         }
       ]
