@@ -18,7 +18,7 @@ var MapsLib = {
 
   //the encrypted Table ID of your Fusion Table (found under File => About)
   //NOTE: numeric IDs will be depricated soon
-  fusionTableId:      "1JwN7NZzX1P0qZR_NfKSXOtHGzFRfQOZS-oidMesR",
+  fusionTableId:      "1blcRnbYRK8QiIyvIzQaY_Yqxd8WSUxHuWBjldOaG",
 
   //*New Fusion Tables Requirement* API key. found at https://code.google.com/apis/console/
   //*Important* this key is for demonstration purposes. please register your own.
@@ -102,8 +102,8 @@ var MapsLib = {
         from:   MapsLib.fusionTableId,
         select: MapsLib.locationColumn
       },
-     styleId: 4,
-     templateId: 5
+     styleId: 3,
+     templateId: 3
     });
     MapsLib.searchrecords.setMap(map);
   },
@@ -164,7 +164,7 @@ var MapsLib = {
         where:  whereClause
       },
      styleId: 2,
-     templateId: 3
+     templateId: 2
     });
     MapsLib.searchrecords.setMap(map);
     MapsLib.enableMapTips();
@@ -230,7 +230,7 @@ var MapsLib = {
 
   enableMapTips: function () {
     MapsLib.searchrecords.enableMapTips({
-      select: "'Tier 2017'",
+      select: "'Tier 2018'",
       from: MapsLib.fusionTableId,
       geometryColumn: MapsLib.locationColumn,
       googleApiKey: MapsLib.googleApiKey,
@@ -259,7 +259,7 @@ var MapsLib = {
   },
 
   getTierNumber: function(whereClause) {
-    MapsLib.query("'Tier 2017'", whereClause,"MapsLib.displayTierNumber");
+    MapsLib.query("'Tier 2018'", whereClause,"MapsLib.displayTierNumber");
   },
 
   displayTierNumber: function(json) {
@@ -275,7 +275,7 @@ var MapsLib = {
   },
 
   getTierDemographics: function(tier) {
-    var selectColumns = "AVERAGE('Tier 2017'), "
+    var selectColumns = "AVERAGE('Tier 2018'), "
     selectColumns += "AVERAGE('Estimated Median Family Income Cumulative Percentage'),";
     selectColumns += "AVERAGE('Number of School Age Children'), ";
     selectColumns += "AVERAGE('% of Single Parent Households Cumulative Percentage'),";
@@ -284,7 +284,7 @@ var MapsLib = {
     selectColumns += "AVERAGE('Educational Attainment Score Cumulative Percentage'),";
     selectColumns += "AVERAGE('Weighted Average NWEA Performance at Attendance Area Schools Cumulative Percentage')";
 
-    var whereClause = "'Tier 2017' = " + tier;
+    var whereClause = "'Tier 2018' = " + tier;
     MapsLib.query(selectColumns, whereClause,"MapsLib.displayTierDemographics");
   },
 
