@@ -27,23 +27,9 @@
 
   
 	<link href='styles/map.css' media='all' rel='stylesheet' type='text/css' />
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.37&key=AIzaSyCkoyeoLgbIHkMjzJOhBZ_IEnooCYZOcaI"></script>
   <script src="source/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-  <script src="source/jquery.formatCurrency-1.4.0.min.js"></script>
-	<script src="source/maps_lib.js" type="text/javascript"></script>
 	<script src="source/analytics_lib.js" type="text/javascript"></script>
-
-	<script type="text/javascript">
-
-	jQuery(document).ready(function() {
-        MapsLib.getTierDemographics('1');
-        MapsLib.getTierDemographics('2');
-        MapsLib.getTierDemographics('3');
-        MapsLib.getTierDemographics('4');
-    });
-
-</script>
 </head>
 <body>
 	<div id="page">
@@ -53,7 +39,6 @@
 				<li>About</li>
         <li><a href="testimonials.html">Testimonials</a></li>
         <li><a href='tier-calculation.html'>Tier calculation</a></li>
-        <li><a href="tier-differences.html">Tier differences</a></li>
 			</ul>
 			<h1>About</h1>
 			<hr />
@@ -78,9 +63,9 @@
 
       <p>This site was launched in 2012 and we have updated the tiers (yes, they change every year) ever since. In 2015, Derek Eder <a href='https://chihacknight.org/blog/2015/10/09/the-labor-required-to-keep-civic-apps-alive.html'>wrote about why we built this site and how we update the data</a>.</p>
 
-      <p>In 2016, Chicago Public Schools added their own tiers layer to the official <a href='https://cps.edu/map'>School Locator Map</a>, which allows you to search for your tier by address like our site does. We are happy that this site influenced CPS to make the tier lookup process easier for parents!</p>
+      <p>In 2016, Chicago Public Schools added their own tiers layer to the official <a href='https://schoolinfo.cps.edu/schoollocator/index.html?overlay=tier'>School Locator Map</a>, which allows you to search for your tier by address like our site does. We are happy that this site influenced CPS to make the tier lookup process easier for parents!</p>
 
-      <p style='text-align: center;'><a href='https://cps.edu/map'><img src='/images/cps-school-locator-tiers.jpg' alt='Tiers on the CPS School Locator' title='Tiers on the CPS School Locator' style='width: 80%;' /></a>
+      <p style='text-align: center;'><a href='https://schoolinfo.cps.edu/schoollocator/index.html?overlay=tier'><img src='/images/cps-school-locator-tiers-2.jpg' alt='Tiers on the CPS School Locator' title='Tiers on the CPS School Locator' style='width: 80%;' /></a>
         <br /><em>The CPS School Locator Map with tiers layer</em></p>
 
       <p>Now, on to what the tier system is and how it works.</p>
@@ -134,7 +119,7 @@
 
       <p>The following table shows what the average area looks like for each Tier. It is based on data from the <a href='http://www.census.gov/acs/www/'>2010 American Community Survey</a>.</p>
 
-      <table class='data'>
+      <table class="data">
         <thead>
           <tr>
             <th>Tier</th>
@@ -148,14 +133,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr id="tier-1-demographics">
-          </tr>
-          <tr id="tier-2-demographics">
-          </tr>
-          <tr id="tier-3-demographics">
-          </tr>
-          <tr id="tier-4-demographics">
-          </tr>
+          <tr id="tier-1-demographics"><td><strong>Tier&nbsp;1</strong></td><td id="tier-1-income">14.6%</td><td>602</td><td>19.6%</td><td>61.6%</td><td>20.6%</td><td>27.1%</td><td>20.6%</td></tr>
+          <tr id="tier-2-demographics"><td><strong>Tier&nbsp;2</strong></td><td id="tier-2-income">36.6%</td><td>623</td><td>34.9%</td><td>50.5%</td><td>41.3%</td><td>42.2%</td><td>37.3%</td></tr>
+          <tr id="tier-3-demographics"><td><strong>Tier&nbsp;3</strong></td><td id="tier-3-income">61.2%</td><td>570</td><td>53.5%</td><td>51.8%</td><td>57.9%</td><td>61.1%</td><td>50.6%</td></tr>
+          <tr id="tier-4-demographics"><td><strong>Tier&nbsp;4</strong></td><td id="tier-4-income">86.8%</td><td>524</td><td>82.1%</td><td>62.1%</td><td>66.0%</td><td>84.1%</td><td>78.8%</td></tr>
         </tbody>
       </table>
 
